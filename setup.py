@@ -1,27 +1,26 @@
 import setuptools
-
-try:
-    import pypandoc
-    long_description = pypandoc.convert('README.md', 'rst')
-except ImportError:
-    long_description = open('README.md').read()
-
 from flintrock import __version__
+
+
+with open('README.md') as f:
+    long_description = f.read()
 
 setuptools.setup(
     name='Flintrock',
     version=__version__,
     description='A command-line tool for launching Apache Spark clusters.',
     long_description=long_description,
+    # FYI: This option requires setuptools >= 38.6.0.
+    long_description_content_type="text/markdown",
     url='https://github.com/nchammas/flintrock',
     author='Nicholas Chammas',
     author_email='nicholas.chammas@gmail.com',
     license='Apache License 2.0',
-    python_requires='>= 3.4',
+    python_requires='>= 3.5',
 
     # See: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
 
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
@@ -35,9 +34,6 @@ setuptools.setup(
 
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3 :: Only',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
     ],
     keywords=['Apache Spark'],
 
@@ -54,7 +50,7 @@ setuptools.setup(
         'boto3',
         'botocore',
         'click',
-        'paramiko == 2.4.1',
+        'paramiko == 2.7.1',
         'PyYAML',
         # This is to ensure that PyInstaller works. dateutil is an
         # indirect dependency of Flintrock, and PyInstaller chokes on
